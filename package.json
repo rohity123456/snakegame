@@ -1,0 +1,12 @@
+{
+  "name": "snakegame",
+  "version": "1.0.0",
+  "description": "A snake game for FUN !",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rohit",
+  "license": "ISC",
+  "keywords": []
+}
