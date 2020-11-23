@@ -1,4 +1,5 @@
 import dot from "./dot";
+import game from "./game";
 import { context } from "./test";
 class Snake {
   constructor(width = 10, height = 10, speed = 2) {
@@ -21,68 +22,81 @@ class Snake {
   };
   updateSnake = () => {
     const snake = this;
-    for (let i = 0; i < snake.tail.length - 1; i++)
-      snake.tail[i] = snake.tail[i + 1];
-    if (snake.score > 0)
-      snake.tail[snake.score - 1] = { x: snake.x, y: snake.y };
-    let { x, y, direction, speed } = snake;
-
-    switch (direction) {
+    if (game.IsSnakeHittingItself()) snake.stop = true;
+    this.updateSnakeTail();
+    game.updateScore();
+    switch (snake.direction) {
       case "left": {
-        if (x + snake.width < 0) {
-          snake.x = canvas.width;
-        } else snake.x -= speed;
-        if (snake.y > canvas.height) {
-          snake.y = canvas.height - 10;
-        }
-        if (snake.y < 0) {
-          snake.y = canvas.height + 10;
-        }
+        this.goLeft();
         break;
       }
       case "right": {
-        if (x - snake.width > canvas.width) {
-          snake.x = -snake.width;
-        } else snake.x += speed;
-        if (snake.y > canvas.height) {
-          snake.y = canvas.height - 10;
-        }
-        if (snake.y < 0) {
-          snake.y = canvas.height + 10;
-        }
+        this.goRight();
         break;
       }
       case "bottom": {
-        if (y - snake.height > canvas.height) {
-          snake.y = -snake.height;
-        } else snake.y += speed;
-        if (snake.x > canvas.width) {
-          snake.x = canvas.width - 10;
-        }
-        if (snake.x < 0) {
-          snake.x = canvas.width + 10;
-        }
+        this.goBottom();
+
         break;
       }
       case "top": {
-        if (y + snake.height < 0) {
-          snake.y = canvas.height;
-        } else snake.y -= speed;
-        if (snake.x > canvas.width) {
-          snake.x = canvas.width - 10;
-        }
-        if (snake.x < 0) {
-          snake.x = canvas.width + 10;
-        }
+        this.goTop();
+
         break;
       }
     }
-
-    if (Math.abs(snake.x - dot.x) <= 5 && Math.abs(snake.y - dot.y) <= 5) {
-      dot.isEaten = true;
-      snake.score++;
-    }
   };
+  goLeft() {
+    if (snake.x + snake.width < 0) {
+      snake.x = canvas.width;
+    } else snake.x -= snake.speed;
+    if (snake.y > canvas.height) {
+      snake.y = canvas.height - 10;
+    }
+    if (snake.y < 0) {
+      snake.y = canvas.height + 10;
+    }
+  }
+  goRight() {
+    if (snake.x - snake.width > canvas.width) {
+      snake.x = -snake.width;
+    } else snake.x += snake.speed;
+    if (snake.y > canvas.height) {
+      snake.y = canvas.height - 10;
+    }
+    if (snake.y < 0) {
+      snake.y = canvas.height + 10;
+    }
+  }
+  goTop() {
+    if (snake.y + snake.height < 0) {
+      snake.y = canvas.height;
+    } else snake.y -= snake.speed;
+    if (snake.x > canvas.width) {
+      snake.x = canvas.width - 10;
+    }
+    if (snake.x < 0) {
+      snake.x = canvas.width + 10;
+    }
+  }
+  goBottom() {
+    if (snake.y - snake.height > canvas.height) {
+      snake.y = -snake.height;
+    } else snake.y += snake.speed;
+    if (snake.x > canvas.width) {
+      snake.x = canvas.width - 10;
+    }
+    if (snake.x < 0) {
+      snake.x = canvas.width + 10;
+    }
+  }
+  updateSnakeTail() {
+    for (let i = 0; i < snake.tail.length - 1; i++) {
+      snake.tail[i] = snake.tail[i + 1];
+    }
+    if (snake.score > 0)
+      snake.tail[snake.score - 1] = { x: snake.x, y: snake.y };
+  }
 }
 
 const snake = new Snake();

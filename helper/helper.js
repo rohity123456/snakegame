@@ -9,20 +9,6 @@ class HelperFunction {
   };
   generateRandomValues = (min, max) =>
     Math.floor(Math.random() * (max - min) + min);
-
-  checkUserAction = (e) => {
-    if (e.key == "ArrowUp") snake.direction = "top";
-    else if (e.key == "ArrowDown") snake.direction = "bottom";
-    else if (e.key == "ArrowLeft") snake.direction = "left";
-    else if (e.key == "ArrowRight") snake.direction = "right";
-    else if (e.key == " ") {
-      let stop = snake.stop;
-      snake.stop = !snake.stop;
-      if (stop) {
-        update();
-      }
-    }
-  };
 }
 const HF = new HelperFunction();
 console.log(HF);

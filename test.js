@@ -1,30 +1,24 @@
 import dot from "./dot.js";
+import game from "./game.js";
 import HF from "./helper/helper.js";
 import snake from "./snake.js";
 //get Canvas element
 
 const canvas = HF.getEl("canvas");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight - 100;
 export const context = canvas.getContext("2d");
-//debugger;
 
-const fixDPI = () => {
-  const canvas = HF.getEl("canvas");
-  const w = parseInt(getComputedStyle(canvas).getPropertyValue("width"));
-  const h = parseInt(getComputedStyle(canvas).getPropertyValue("height"));
-  const DPI = window.devicePixelRatio;
-  canvas.setAttribute("height", h * DPI);
-  canvas.setAttribute("width", w * DPI);
-};
+game.update();
+window.addEventListener("keydown", game.checkUserAction);
 
-export const update = () => {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  snake.updateSnake();
-  snake.draw(snake);
-  dot.draw();
-  if (!snake.stop) requestAnimationFrame(update);
-};
-
-window.addEventListener("keydown", HF.checkUserAction);
-update();
+//for testing
+// let a = (i, n) => {
+//   if (i == n - 1) return;
+//   snake.tail[i] = {
+//     x: snake.x - n * 2 + (i + 1) * 2,
+//     y: snake.y,
+//   };
+//   a(++i, n);
+// };
+// a(0, 301);
