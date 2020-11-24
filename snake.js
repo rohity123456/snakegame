@@ -22,7 +22,7 @@ class Snake {
   };
   updateSnake = () => {
     const snake = this;
-    if (game.IsSnakeHittingItself()) snake.stop = true;
+    game.checkIsSnakeHittingItself();
     this.updateSnakeTail();
     game.updateScore();
     switch (snake.direction) {
@@ -96,6 +96,12 @@ class Snake {
     }
     if (snake.score > 0)
       snake.tail[snake.score - 1] = { x: snake.x, y: snake.y };
+  }
+  reset() {
+    this.tail = [];
+    this.score = 0;
+    this.stop = false;
+    game.update();
   }
 }
 

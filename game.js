@@ -4,16 +4,21 @@ import snake from "./snake.js";
 import { context } from "./test.js";
 
 class Game {
+  constructor() {
+    this.highestscore = 0;
+  }
   IsSnakeHittingItself() {
-    return snake.tail
-      .slice(0, snake.tail.length - 1)
-      .some(({ x, y }) => snake.x - x == 0 && snake.y - y == 0);
+    return snake.tail.some(({ x, y }) => snake.x - x == 0 && snake.y - y == 0);
   }
   checkUserAction = (e) => {
-    if (e.key == "ArrowUp") snake.direction = "top";
-    else if (e.key == "ArrowDown") snake.direction = "bottom";
-    else if (e.key == "ArrowLeft") snake.direction = "left";
-    else if (e.key == "ArrowRight") snake.direction = "right";
+    e.stopPropagation();
+    if (e.key == "ArrowUp" || e.target.id == "uparrow") snake.direction = "top";
+    else if (e.key == "ArrowDown" || e.target.id == "downarrow")
+      snake.direction = "bottom";
+    else if (e.key == "ArrowLeft" || e.target.id == "leftarrow")
+      snake.direction = "left";
+    else if (e.key == "ArrowRight" || e.target.id == "rightarrow")
+      snake.direction = "right";
     else if (e.key == " ") {
       let stop = snake.stop;
       snake.stop = !snake.stop;
@@ -35,6 +40,36 @@ class Game {
       snake.score++;
       HF.setHtml(".score", snake.score);
     }
+  }
+  checkIsSnakeHittingItself() {
+    if (game.IsSnakeHittingItself()) {
+      snake.stop = true;
+      this.updateScoreOnUI(snake.score);
+    }
+  }
+  updateScoreOnUI(score) {
+    if (score > this.highestscore) this.highestscore = score;
+    HF.setHtml(".scoretext", score);
+    HF.setHtml(".highestscoretext", this.highestscore);
+    HF.getEl(".modal").style.visibility = "visible";
+    HF.getEl(".modalInfo").classList.add("modalInfoActive");
+  }
+  resetGame() {
+    HF.getEl(".modalInfo").classList.remove("modalInfoActive");
+  }
+  onPlayAgainClick() {
+    snake.reset();
+    game.resetGame();
+    HF.setHtml(".score", snake.score);
+    HF.getEl(".modal").style.visibility = "hidden";
+  }
+  assignCallbacksToMobBtnEvents() {
+    ["#uparrow", "#downarrow", "#leftarrow", "#rightarrow"].forEach(
+      (selector) => {
+        HF.getEl(selector).onclick = this.checkUserAction;
+        console.log(HF.getEl(selector));
+      }
+    );
   }
 }
 const game = new Game();

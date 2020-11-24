@@ -1,5 +1,3 @@
-import snake from "../snake";
-import { update } from "../test";
 class HelperFunction {
   getEl = (selector) => document.querySelector(selector);
   setHtml = (selector, HTML) => {

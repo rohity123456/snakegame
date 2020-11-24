@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>SNAKE GAME</title>
 </head>
 
@@ -22,7 +23,39 @@
     </div>
   </div>
   <canvas id="canvas"></canvas>
-  <div class="modal"> </div>
+  <div id="mobile_btns">
+    <div class="vertical_arrows">
+      <span><i id="uparrow" class="fa fa-arrow-circle-up"></i></span>
+      <span><i id="downarrow" class="fa fa-arrow-circle-down"></i></span>
+    </div>
+    <div class="horizontal_arrows">
+      <span><i id="leftarrow" class="fa fa-arrow-circle-left"></i></span>
+      <span><i id="rightarrow" class="fa fa-arrow-circle-right"></i></span>
+    </div>
+  </div>
+  <div class="modal">
+    <div class="modalInfo">
+      <div class="modalInfo__top">
+        <h3>Well Played !</h3>
+      </div>
+      <div class="modalInfo__center">
+        <div class="yourscore finalscore">
+          <span>Your Score : </span>
+          <span class="scoretext">0 </span>
+        </div>
+        <div class="highestscore finalscore">
+          <span>Highest : </span>
+          <span class="highestscoretext"> 0</span>
+        </div>
+      </div>
+      <div class="modalInfo__bottom">
+        <h4>Wanna Play Again ?</h4>
+        <div class="modal__buttons">
+          <button>Yes ! Why Not ?</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="./test.js"></script>
 
