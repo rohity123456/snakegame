@@ -1,2 +1,3 @@
-/dist
-/.cache
+/snakefrontend/dist
+/snakefrontend/.cache
+/snakebackend/node_modules
