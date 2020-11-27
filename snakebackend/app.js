@@ -2,15 +2,15 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const UserRouter = require("./routes/users");
+require("dotenv").config();
 //dependencies//
 
 //Objects//
 const App = express();
 //Objects//
 //DB CONNECTION//
-const DB_URL = "mongodb://localhost:27017/snakedb";
 mongoose
-  .connect(DB_URL, {
+  .connect(process.env.DB_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,7 +21,6 @@ mongoose
   });
 //DB CONNECTION//
 App.use(express.json());
-App.use(express.urlencoded());
 //routes//
 
 App.use("/api", UserRouter);
