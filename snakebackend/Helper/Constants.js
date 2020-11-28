@@ -7,4 +7,6 @@ module.exports = {
     "There is some internal server error, please try again later",
   STATUS_FAILED: "FAILED",
   STATUS_SUCCESS: "SUCCESS",
+  STATUS_SUCCESS: "SUCCESS",
+  AUTHORIZATION: "authorization",
 };
