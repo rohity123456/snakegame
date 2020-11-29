@@ -3,22 +3,30 @@ import game from "./game.js";
 import HF from "./helper/helper.js";
 import snake from "./snake.js";
 //get Canvas element
-
+window.onload = (e) => {
+  if (!document.cookie || !HF.getCookieByKey("token")) {
+    console.log("TOKEN NOT THERE");
+  }
+  startGame();
+};
 const canvas = HF.getEl("canvas");
-canvas.width = window.innerWidth;
-window.addEventListener("keydown", game.checkUserAction);
-
-if (window.innerWidth < 1000) {
-  canvas.height = window.innerHeight - 150;
-  game.assignCallbacksToMobBtnEvents();
-  HF.getEl("#mobile_btns").style.display = "flex";
-} else canvas.height = window.innerHeight - 30;
 export const context = canvas.getContext("2d");
 
-game.update();
+const startGame = () => {
+  canvas.width = window.innerWidth;
+  window.addEventListener("keydown", game.checkUserAction);
 
-const btnPlayAgain = HF.getEl(".modal__buttons button:first-child");
-btnPlayAgain.addEventListener("click", game.onPlayAgainClick);
+  if (window.innerWidth < 1000) {
+    canvas.height = window.innerHeight - 150;
+    game.assignCallbacksToMobBtnEvents();
+    HF.getEl("#mobile_btns").style.display = "flex";
+  } else canvas.height = window.innerHeight - 30;
+
+  game.update();
+
+  // const btnPlayAgain = HF.getEl(".modal__buttons button:first-child");
+  // btnPlayAgain.addEventListener("click", game.onPlayAgainClick);
+};
 
 //for testing
 let a = (i, n) => {
@@ -29,4 +37,4 @@ let a = (i, n) => {
   };
   a(++i, n);
 };
-//a(0, 301);
+a(0, 30);

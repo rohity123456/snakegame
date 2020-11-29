@@ -1,5 +1,7 @@
 import dot from "./dot.js";
+import UISTR from "./helper/constants.js";
 import HF from "./helper/helper.js";
+import util from "./helper/util.js";
 import snake from "./snake.js";
 import { context } from "./test.js";
 
@@ -49,9 +51,15 @@ class Game {
   }
   updateScoreOnUI(score) {
     if (score > this.highestscore) this.highestscore = score;
+    util.setActiveCardInModal(UISTR.MODAL_INFO);
+    util.addListener(
+      ".modal__buttons button:first-child",
+      "click",
+      game.onPlayAgainClick
+    );
     HF.setHtml(".scoretext", score);
     HF.setHtml(".highestscoretext", this.highestscore);
-    HF.getEl(".modal").style.visibility = "visible";
+    util.setVisiblity(".modal", "visible");
     HF.getEl(".modalInfo").classList.add("modalInfoActive");
   }
   resetGame() {

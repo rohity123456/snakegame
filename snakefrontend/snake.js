@@ -10,7 +10,7 @@ class Snake {
     this.y = 100;
     this.direction = "right";
     this.stop = false;
-    this.score = 0;
+    this.score = 30;
     this.tail = [];
   }
   draw = ({ x, y, width, height, direction }) => {

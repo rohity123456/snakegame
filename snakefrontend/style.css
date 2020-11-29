@@ -1,3 +1,6 @@
+:root {
+  --colorform: purple;
+}
 *,
 canvas {
   bottom: 0;
@@ -37,7 +40,7 @@ canvas {
   position: absolute;
   z-index: 1000;
   display: grid;
-  visibility: hidden;
+  visibility: visible;
   place-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -139,4 +142,84 @@ canvas {
   top: 2rem;
   display: flex;
   justify-content: space-between;
+}
+/*form */
+.form {
+  min-width: clamp(300px, 40vw, 400px);
+  min-height: 400px;
+  background-color: white;
+  padding: 0.5rem;
+}
+.form__top {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.form__top i {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+.form__top h2 {
+  font-weight: 500;
+  margin-right: 20px;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: #000a42;
+}
+.form__bottom {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.form__bottom form {
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+.form__bottom form input {
+  min-width: clamp(200px, 40vw, 400px);
+  padding: 0.5rem 0.2rem;
+  outline-style: none;
+  border: none;
+  border-bottom: 1px solid;
+}
+.form__bottom form div {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form__bottom form div::after {
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: var(--colorform);
+  content: "";
+  transition: all 400ms ease-in-out;
+}
+.form__bottom form div:focus-within:after {
+  width: 100%;
+}
+.form__bottom button {
+  padding: 0.5rem 0;
+  outline: none;
+  margin-top: 2rem;
+  border: none;
+  font-weight: 500;
+  background-color: #eee5e9;
+}
+.form__bottom button:hover {
+  background-color: var(--colorform);
+  color: white;
+}
+.form__bottom p {
+  margin-top: 0.5rem;
+}
+.spanlink {
+  color: var(--colorform);
+  font-weight: 600;
+  cursor: pointer;
 }
