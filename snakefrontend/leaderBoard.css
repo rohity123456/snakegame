@@ -1,0 +1,86 @@
+:root {
+  --colorRedBoard: #ff6663;
+  --ff: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
+}
+.leaderBoardContainer {
+  float: right;
+  background-color: #423e3b;
+  height: calc(100vh - 50px);
+  width: 300px;
+  visibility: visible;
+}
+.myboard {
+  background-color: var(--colorRedBoard);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem 0;
+  position: relative;
+}
+.myRankBox {
+  bottom: 0;
+  position: absolute;
+}
+.myRankBox span {
+  font-weight: 600;
+  font-family: var(--ff);
+}
+.myboard h3 {
+  font-weight: 500;
+  font-family: var(--ff);
+}
+.l_text {
+  font-weight: 100;
+  font-family: fantasy;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: #e2dcde;
+  text-align: center;
+  margin-top: 10px;
+}
+.myboard .myboard__center {
+  border-radius: 50%;
+  min-width: 50px;
+  min-height: 50px;
+  background-color: aliceblue;
+}
+.playersboard {
+}
+.playersboard ul {
+  counter-reset: li;
+  margin-top: 10px;
+}
+.playersboard ul li {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(63, 94, 251);
+  padding: 0.5rem;
+  color: #f1e4e8;
+  padding-left: 2rem;
+  height: 30px;
+  margin-bottom: 5px;
+  transition: all 300ms ease-in-out;
+}
+.playersboard ul li:hover {
+  background: #ff6663;
+}
+.playersboard ul li:hover::before {
+  background: rgb(63, 94, 251);
+}
+.playersboard ul li::before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: 0;
+  background-color: var(--colorRedBoard);
+  height: 60%;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 10px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}

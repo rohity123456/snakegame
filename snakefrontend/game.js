@@ -1,4 +1,5 @@
 import dot from "./dot.js";
+import BE from "./helper/backend.js";
 import UISTR from "./helper/constants.js";
 import HF from "./helper/helper.js";
 import util from "./helper/util.js";
@@ -50,7 +51,10 @@ class Game {
     }
   }
   updateScoreOnUI(score) {
-    if (score > this.highestscore) this.highestscore = score;
+    if (score > this.highestscore) {
+      this.highestscore = score;
+      BE.updateScoreInBackend(this.highestscore);
+    }
     util.setActiveCardInModal(UISTR.MODAL_INFO);
     util.addListener(
       ".modal__buttons button:first-child",

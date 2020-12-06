@@ -1,6 +1,5 @@
-import dot from "./dot";
-import game from "./game";
-import { context } from "./test";
+import game from "./game.js";
+import { context } from "./test.js";
 class Snake {
   constructor(width = 10, height = 10, speed = 2) {
     this.width = width;
@@ -9,7 +8,7 @@ class Snake {
     this.x = 500;
     this.y = 100;
     this.direction = "right";
-    this.stop = false;
+    this.stop = true;
     this.score = 30;
     this.tail = [];
   }

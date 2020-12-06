@@ -1,5 +1,8 @@
 :root {
   --colorform: purple;
+  --colorBlue: #740aff;
+  --fontTop: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 *,
 canvas {
@@ -12,18 +15,49 @@ canvas {
   position: relative;
   background-color: black;
 }
+.userDiv {
+  display: flex;
+  align-items: center;
+}
+.authOnly {
+  display: none;
+}
+.username {
+  font-weight: 600;
+}
+.signtop {
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-family: var(--fontTop);
+  background: white;
+  cursor: pointer;
+  color: var(--colorBlue);
+  border: 1px solid var(--colorBlue);
+}
+.signtop:hover {
+  color: white;
+  border: none;
+  background-color: var(--colorBlue);
+}
+.signout {
+  margin-left: 10px;
+  padding: 5px;
+  border: none;
+  vertical-align: bottom;
+}
 .scoreContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50px;
   padding: 0.5rem;
 }
 .scoreContainer h3 {
   font-weight: 500;
   padding: 0;
   margin: 0;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: var(--fontTop);
 }
 .gameTitle {
   display: flex;
@@ -40,7 +74,7 @@ canvas {
   position: absolute;
   z-index: 1000;
   display: grid;
-  visibility: visible;
+  visibility: hidden;
   place-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -153,20 +187,22 @@ canvas {
 .form__top {
   display: flex;
   position: relative;
-  align-items: center;
   justify-content: center;
   text-align: center;
 }
 .form__top i {
-  position: absolute;
-  right: 0;
-  top: 10px;
+  cursor: pointer;
 }
 .form__top h2 {
   font-weight: 500;
-  margin-right: 20px;
+  flex: 1;
   font-size: clamp(1.5rem, 5vw, 2rem);
   color: #000a42;
+}
+.form__top div {
+  flex: 0.04;
+  display: flex;
+  justify-content: flex-end;
 }
 .form__bottom {
   display: flex;
@@ -188,11 +224,20 @@ canvas {
   border-bottom: 1px solid;
 }
 .form__bottom form div {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.form__bottom .inp_error {
+  color: red;
+}
+.form__bottom .generr {
+  text-align: center;
+}
+.form__bottom form div {
   margin-bottom: 0.5rem;
 }
-
-.form__bottom form div::after {
+.form__bottom form div div::after {
   display: block;
   width: 0;
   height: 2px;
@@ -200,7 +245,7 @@ canvas {
   content: "";
   transition: all 400ms ease-in-out;
 }
-.form__bottom form div:focus-within:after {
+.form__bottom form div div:focus-within:after {
   width: 100%;
 }
 .form__bottom button {
@@ -211,7 +256,7 @@ canvas {
   font-weight: 500;
   background-color: #eee5e9;
 }
-.form__bottom button:hover {
+.form__bottom button:enabled:hover {
   background-color: var(--colorform);
   color: white;
 }
@@ -222,4 +267,22 @@ canvas {
   color: var(--colorform);
   font-weight: 600;
   cursor: pointer;
+}
+.loadparent {
+  position: relative;
+}
+.loadicon {
+  position: absolute;
+  left: 50%;
+  vertical-align: middle;
+  font-size: 2rem !important;
+  animation: load 400ms linear infinite;
+}
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

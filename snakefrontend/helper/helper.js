@@ -6,6 +6,25 @@ class HelperFunction {
     el.innerHTML = HTML;
     return el;
   };
+  createEl = (element, classList) => {
+    const el = document.createElement(element);
+    if (classList && classList.length) el.classList.add(...classList);
+    return el;
+  };
+  appendMultipleChilds = (parentEl, chilrenElements) => {
+    chilrenElements.forEach((childEl) => parentEl.append(childEl));
+    return parentEl;
+  };
+  hideAllNonAuthElements() {
+    document
+      .querySelectorAll(".nonAuth")
+      .forEach((element) => (element.style.display = "none"));
+  }
+  showAllAuthElements() {
+    document
+      .querySelectorAll(".authOnly")
+      .forEach((element) => (element.style.display = "initial"));
+  }
   generateRandomValues = (min, max) =>
     Math.floor(Math.random() * (max - min) + min);
   getCookieByKey(key) {
@@ -20,6 +39,24 @@ class HelperFunction {
     }
     console.log(this.cookies);
     return this.cookies[key];
+  }
+  setItemsInLocalStorage(Items) {
+    if (Items.length) {
+      Items.map((item) => {
+        const key = Object.keys(item)[0];
+        localStorage.setItem(key, JSON.stringify(item[key]));
+      });
+    }
+  }
+  getItemFromLocalStorage(itemKey) {
+    return JSON.parse(localStorage.getItem(itemKey));
+  }
+  removeItemsInLocalStorage(Items) {
+    if (Items.length) {
+      Items.map((key) => {
+        localStorage.removeItem(key);
+      });
+    }
   }
 }
 const HF = new HelperFunction();

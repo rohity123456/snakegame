@@ -1,5 +1,5 @@
-const { default: HF } = require("./helper/helper");
-import { context } from "./test";
+import HF from "./helper/helper.js";
+import { context } from "./test.js";
 class Dot {
   constructor(width = 10, height = 10) {
     this.x = undefined;

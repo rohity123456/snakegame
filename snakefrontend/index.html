@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./tooltip.css">
+  <link rel="stylesheet" href="./leaderBoard.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>SNAKE GAME</title>
 </head>
@@ -17,12 +19,37 @@
         alt="">
       <h3>Master</h3>
     </div>
-    <div class="gameScore">
-      <span>Your Score : </span>
-      <span class="score">0 </span>
+    <div class="userDiv">
+      <span class="username authOnly"></span>
+      <button class="signtop nonAuth">SIGN IN</button>
+      <button class="authOnly signtop signout">SIGN OUT</button>
     </div>
   </div>
   <canvas id="canvas"></canvas>
+  <div class="leaderBoardContainer">
+    <div class="myboard">
+      <div class="myboard__left">
+        <p>CURRENT</p>
+        <h3 class="score">0</h3>
+      </div>
+      <div class="myboard__center">
+
+      </div>
+      <div class="myboard__right">
+        <p>HIGHEST</p>
+        <h3>0</h3>
+      </div>
+      <div class="myRankBox">
+        <span>Sign In to see your Rank</span>
+      </div>
+    </div>
+    <h3 class="l_text">LEADER BOARD</h3>
+    <div class="playersboard">
+      <ul>
+      </ul>
+
+    </div>
+  </div>
   <div id="mobile_btns">
     <div class="vertical_arrows">
       <span><i id="uparrow" class="fa fa-arrow-circle-up"></i></span>
@@ -34,24 +61,9 @@
     </div>
   </div>
   <div class="modal">
-    <section class="form">
-      <div class="form__top">
-        <h2>Sign Up to Join Great Players</h2>
-        <i class="fa fa-times"></i>
-      </div>
-      <div class="form__bottom">
-        <form>
-          <div><input type="text" name="" placeholder="name"></div>
-          <div><input type="text" name="" placeholder="username"></div>
-          <div><input type="text" name="" placeholder="password"></div>
-          <button type="submit">SIGN IN</button>
-        </form>
-        <p>Already a User ? Login <span class="spanlink">here</span></p>
-      </div>
-    </section>
   </div>
   </div>
 </body>
-<script src="./test.js"></script>
+<script src="./test.js" type="module"></script>
 
 </html>
