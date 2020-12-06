@@ -7,9 +7,10 @@ Router.post("/signup", UController.signUp);
 Router.post("/test/:userId", UController.isSignedIn, (req, res) =>
   res.send(req.user)
 );
-Router.get(
-  "/highestscorers/:userId",
+Router.post(
+  "/updateUserScore/:userId",
   UController.isSignedIn,
-  UController.getTopTenScorers
+  UController.updateUserScore
 );
+Router.get("/highestscorers", UController.getTopTenScorers);
 module.exports = Router;

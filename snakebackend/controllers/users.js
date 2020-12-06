@@ -5,40 +5,53 @@ const User = require("../models/users");
 const {
   USER_ALREADY_EXIST_MSG,
   STATUS_FAILED,
+  STATUS_SUCCESS,
   INTERNAL_SERVER_ERROR_MSG,
   USER_NOT_FOUND_MSG,
   PASS_INCORRECT,
   AUTHORIZATION,
   USER_DATA_KEYS,
 } = require("../Helper/Constants");
+const { use } = require("../routes/users");
 class UserController {
-  signIn(req, res) {
+  async signIn(req, res) {
     const { username, password } = req.body;
     const errors = HF.validateUser("NA", username, "NA");
     if (errors.length)
       return HF.sendJSONResponse(res, { errors }, 400, STATUS_FAILED);
-    User.findOne({ username })
-      .then((user) => {
-        if (!user.authenticateUser(password))
-          return HF.sendJSONResponse(
-            res,
-            { general: PASS_INCORRECT },
-            400,
-            STATUS_FAILED
-          );
-        return HF.SignJWTandSendResponse(req, res, user);
-      })
-      .catch((error) =>
-        HF.sendJSONResponse(
+    try {
+      const user = await User.findOne({ username });
+      if (!user.authenticateUser(password))
+        return HF.sendJSONResponse(
           res,
-          { general: USER_NOT_FOUND_MSG },
+          { general: PASS_INCORRECT },
           400,
           STATUS_FAILED
-        )
+        );
+      const { _id: id } = user;
+      const highestScores = await User.find()
+        .select("higestScore")
+        .sort("-higestScore")
+        .exec();
+      let Rank = 0;
+      highestScores.find((scorer, index) => {
+        Rank++;
+        return scorer["_id"].toString() == id.toString();
+      });
+      return HF.SignJWTandSendResponse(req, res, user, Rank);
+    } catch (error) {
+      console.log(error);
+      HF.sendJSONResponse(
+        res,
+        { general: USER_NOT_FOUND_MSG },
+        400,
+        STATUS_FAILED
       );
+    }
   }
   async signUp(req, res) {
     const { name, username, password } = req.body;
+    console.log(req.body);
     const errors = HF.validateUser(name, username, password);
     if (errors.length)
       return HF.sendJSONResponse(res, { errors }, 400, STATUS_FAILED);
@@ -80,7 +93,8 @@ class UserController {
         STATUS_FAILED
       );
     const auth = req.headers[AUTHORIZATION];
-    if (auth && typeof auth === "string") token = auth.split(" ")[1];
+    if (auth && typeof auth === "string") token = auth.split("Bearer ")[1];
+    console.log("TOKEN ", token);
     jwt.verify(token || "", process.env.PRIVATEKEY, (err, payload) => {
       if (err)
         return HF.sendJSONResponse(
@@ -139,6 +153,27 @@ class UserController {
         HF.some(scorer, USER_DATA_KEYS)
       ),
     });
+  }
+  async updateUserScore(req, res) {
+    try {
+      console.log("UPDATING");
+      console.log("BODY ", req.body);
+      const resp = await User.updateOne({ _id: req.user._id }, req.body);
+      console.log("nModified : ", resp.nModified);
+      if (resp.nModified)
+        return res.json({
+          message: "Updated Successfully!",
+          status: STATUS_SUCCESS,
+        });
+    } catch (error) {
+      console.log(error);
+      HF.sendJSONResponse(
+        res,
+        { general: INTERNAL_SERVER_ERROR_MSG },
+        500,
+        STATUS_FAILED
+      );
+    }
   }
 }
 

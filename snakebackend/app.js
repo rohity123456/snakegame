@@ -1,6 +1,7 @@
 //dependencies//
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 const UserRouter = require("./routes/users");
 require("dotenv").config();
 //dependencies//
@@ -21,6 +22,23 @@ mongoose
   });
 //DB CONNECTION//
 App.use(express.json());
+
+var whitelist = ["http://127.0.0.1:5500"];
+App.use(
+  cors(/* {
+    origin: function (origin, callback) {
+      console.log(origin);
+      if (whitelist.indexOf(origin) !== -1) {
+        console.log("ALLOWED");
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  } */)
+);
+
 //routes//
 
 App.use("/api", UserRouter);

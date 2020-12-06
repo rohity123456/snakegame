@@ -33,23 +33,26 @@ class Helper {
   some(obj, keys) {
     const toReturn = {};
     for (let key of keys) {
-      console.log(key in obj);
       if (key in obj) toReturn[key] = obj[key];
     }
-    console.log("toReturn", toReturn, obj.name);
     return toReturn;
   }
   sendJSONResponse(res, data, statusCode = 200, status = "SUCCESS") {
     data.status = status;
     return res.status(statusCode).json(data);
   }
-  SignJWTandSendResponse(req, res, user) {
+  SignJWTandSendResponse(req, res, user, rank) {
     const userData = HF.some(user, USER_DATA_KEYS);
+    if (rank != undefined) userData.Rank = rank;
     const token = jwt.sign(userData, process.env.PRIVATEKEY, {
       expiresIn: "2h",
     });
-    res.cookie("token", token);
-    return this.sendJSONResponse(res, { user: userData }, 203, STATUS_SUCCESS);
+    return this.sendJSONResponse(
+      res,
+      { user: userData, token },
+      203,
+      STATUS_SUCCESS
+    );
   }
 }
 const HF = new Helper();
