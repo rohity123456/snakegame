@@ -4,7 +4,7 @@ import UISTR from "./helper/constants.js";
 import HF from "./helper/helper.js";
 import util from "./helper/util.js";
 import snake from "./snake.js";
-import { context } from "./test.js";
+import { canvas, context } from "./test.js";
 
 class Game {
   constructor() {

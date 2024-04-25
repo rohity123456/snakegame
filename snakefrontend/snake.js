@@ -1,5 +1,5 @@
 import game from "./game.js";
-import { context } from "./test.js";
+import { canvas, context } from "./test.js";
 class Snake {
   constructor(width = 10, height = 10, speed = 2) {
     this.width = width;

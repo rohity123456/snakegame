@@ -28,7 +28,7 @@ window.onload = async (e) => {
 export const proceedWithuUpdate = () => {
   util.ProceedWithAfterAuthActivity();
 };
-const canvas = HF.getEl("canvas");
+export const canvas = HF.getEl("canvas");
 export const context = canvas.getContext("2d");
 
 const updateCanvas = () => {
@@ -49,13 +49,3 @@ const updateCanvas = () => {
   // btnPlayAgain.addEventListener("click", game.onPlayAgainClick);
 };
 
-//for testing
-let a = (i, n) => {
-  if (i == n - 1) return;
-  snake.tail[i] = {
-    x: snake.x - n * 2 + (i + 1) * 2,
-    y: snake.y,
-  };
-  a(++i, n);
-};
-a(0, 30);
