@@ -1,3 +1,4 @@
 /snakefrontend/dist
 /snakefrontend/.cache
 /snakebackend/node_modules
+/snakebackend/.env

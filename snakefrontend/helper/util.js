@@ -70,6 +70,8 @@ class Util {
       if (data.status === CONST.STATUS_FAILED)
         util.setErrorMessages([".form__bottom .generr"], [data], ["general"]);
       console.log("USER", data);
+      HF.setItemsInLocalStorage([{ token: data.token }, { user: data.user }]);
+      util.ProceedWithAfterAuthActivity();
     } catch (exception) {
       console.error(exception);
     } finally {
@@ -109,6 +111,30 @@ class Util {
       util.toggleEnable(".form__bottom button", true);
     }
   }
+
+  openSignInForm(e) {
+    util.setActiveCardInModal(UISTR.SIGNIN_FORM);
+    util.addListener(".form__bottom button", "click", util.onSignInBtnClick);
+    util.addListener(".form__bottom .spanlink", "click", () => util.onSpanLinkClick(e, false));
+    util.addListener(".form__top i", "click", util.closeWindow);
+  }
+  openSignUpForm(e) {
+    util.setActiveCardInModal(UISTR.SIGNUP);
+    util.addListener(".form__bottom button", "click", util.onSignUpBtnClick);
+    util.addListener(".form__bottom .spanlink", "click", () => util.onSpanLinkClick(e, true));
+    util.addListener(".form__top i", "click", util.closeWindow);
+  }
+  onSpanLinkClick(e, isSignIn) {
+    console.log("CLICKED")
+    if(isSignIn){
+      util.openSignInForm();
+    }
+    else
+    {
+      util.openSignUpForm();
+    }
+  }
+    
   getUIInputBySelector = (selectors) =>
     selectors.map((selector) => HF.getEl(selector).value);
   setErrorMessages(selectors, errors, keyArray) {

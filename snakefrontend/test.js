@@ -9,9 +9,11 @@ window.onload = async (e) => {
   if (!BE.isAuthenticated()) {
     util.setActiveCardInModal(UISTR.SIGNIN_FORM);
     util.addListener(".form__bottom button", "click", util.onSignInBtnClick);
+    util.addListener(".form__bottom .spanlink", "click", util.onSpanLinkClick);
     util.addListener(".form__top i", "click", util.closeWindow);
     util.addListener(".signtop", "click", () => {
       util.setVisiblity(".modal", "visible");
+      util.openSignInForm();
     });
     util.setVisiblity(".modal", "visible");
   } else {

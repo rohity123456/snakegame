@@ -28,7 +28,7 @@ class UI_HTML_STRINGS {
         <form>
           <div>
             <div>
-              <input type="text" value="rohity123" autocomplete="off" placeholder="username" id="usernamein">
+              <input type="text" value="" autocomplete="off" placeholder="username" id="usernamein">
             </div>
             <span class="inp_error"></span>
           </div>
